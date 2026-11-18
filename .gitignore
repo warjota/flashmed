@@ -1,0 +1,23 @@
+# Conteúdo (flashcards, baralhos, material da Medway) NÃO vai para o git.
+# Só entra o projeto: ferramentas, guia, exemplos e templates.
+*.apkg
+*.anki2
+*.anki21b
+*.colpkg
+*.csv
+entrada/
+novos/
+limpeza/
+dados/PRIORIDADES.md
+graphify-out/
+
+# Decisões por deck contêm o texto dos cards
+ferramentas/decks/
+ferramentas/dm_decisions.py
+ferramentas/dm_lacunas.py
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

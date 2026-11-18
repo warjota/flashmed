@@ -1,0 +1,3 @@
+anki>=25.2
+zstandard
+scikit-learn
