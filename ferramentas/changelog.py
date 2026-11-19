@@ -22,8 +22,11 @@ def main(rows_path, out_csv, out_md, deck):
             w.writerow([r['n'], r['acao'], r['motivo'], '' if ex else r['frente'], '' if ex else r['verso'], r['original_frente'], r['original_verso'][:600]])
     by = collections.defaultdict(list)
     for r in rows: by[r['acao']].append(r)
-    orig = len(rows) - len(by['NOVO']); kept = orig - len(by['EXCLUIR'])
-    L = [f'# Alterações no deck {deck}', '', f'**{orig} cards originais → {kept} mantidos + {len(by["NOVO"])} novos = {kept + len(by["NOVO"])} ativos.**', '',
+    orig = sum(isinstance(r['n'], int) for r in rows)          # cards divididos geram linhas "12.2", "12.3"...
+    kept = len(rows) - len(by['NOVO']) - len(by['EXCLUIR'])     # cards ativos vindos da Medway (já contando as divisões)
+    div = sum(isinstance(r['n'], str) and r['n'] != 'novo' for r in rows)
+    L = [f'# Alterações no deck {deck}', '', f'**{orig} cards originais → {kept} mantidos + {len(by["NOVO"])} novos = {kept + len(by["NOVO"])} ativos.**'
+         + (f' ({div} vêm da divisão de cards longos em cards curtos.)' if div else ''), '',
          '| Ação | Cards |', '|---|---|']
     for k, lab in [('EXCLUIR', 'Excluídos'), ('EDITAR', 'Reescritos, fundidos ou corrigidos'), ('LIMPAR', 'Limpeza automática'), ('MANTER-REVISAR', 'Mantidos por dado (eu excluiria)'), ('NOVO', 'Novos (lacunas)')]:
         L.append(f'| {lab} | {len(by[k])} |')

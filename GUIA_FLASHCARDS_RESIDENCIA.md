@@ -44,8 +44,9 @@ Objetivo acima de tudo: **o card tem que passar rápido**, para dar volume de re
 |---|---|
 | **"(n)" só em lista de 3 ou mais itens** | Pergunta no singular não leva número. "...causas de síndrome compartimental? (5)" |
 | **A frente pergunta tudo o que o verso responde**, se for rápido | Embolia gordurosa: "Quais os achados? (3) / E a prevenção?" |
-| **Tabela só quando o conteúdo é um esquema** (cenário × conduta, doses, alternativas) | Modelo aprovado: ATB da fratura exposta (Cenário × Esquema EV, alergia). Bordas `#888`, cabeçalho cinza translúcido, fonte 14px |
-| **Fluxograma** (HTML, caixas verticais com setas) **só em protocolo** sequencial com decisão | Aprovado em 2026-11-17. Modelo: `novos/exemplo_fluxograma.html` (síndrome compartimental), com cores da tabela, borda vermelha na conduta crítica |
+| **Tabela só quando o conteúdo é um esquema** (cenário × conduta, doses, alternativas) | Modelo aprovado: ATB da fratura exposta (Cenário × Esquema EV, alergia). Bordas `#888`, cabeçalho cinza translúcido, fonte 14px. **Só tabela pequena** (até ~3 linhas × 3 colunas) |
+| **Fluxograma** (HTML, caixas verticais com setas) **só em protocolo** sequencial com decisão | Aprovado em 2026-11-17. Modelo: `novos/exemplo_fluxograma.html` (síndrome compartimental), com cores da tabela, borda vermelha na conduta crítica. **Só fluxograma curto** (até ~4 caixas) |
+| **Tabela ou fluxograma grande → dividir em vários cards curtos** (2026-11-18) | Um card por ramo/linha: "Cushing com ACTH baixo: origem e imagem?", "T-score: em quem usar e cortes?", "NEM 1: componentes? (3)". Mais cards, cada um rápido. Vale também para cards de texto longos (> ~5 linhas) |
 | **Imagem só quando acrescenta muito ao verso**, ou quando ela sozinha já é a resposta | Gustilo-Anderson: verso = só a tabela-imagem. NÃO colocar imagem decorativa nem em todo card, porque atrasa a revisão. Vale também para decks que o usuário já editou: posso sugerir uma imagem quando for realmente pertinente (no deck Fraturas ele já tinha posto as dele) |
 | **Comparação "X x Y" na frente** para pares que se confundem | "Fratura de Colles x Smith" → 1. Colles + comum: desvio **dorsal** / 2. Smith + rara: desvio **volar** |
 | **Negrito para dar ênfase** ao que diferencia ou é cobrado | **dorsal** × **volar**, **sem desvio** × **desvio parcial** |

@@ -35,12 +35,14 @@ def main(dec_path, csv_path, coldb, out, rows_out):
         if d is None: raise SystemExit(f'card {i} sem decisão')
         if d[0] == 'X':
             rows.append(dict(n=i, acao='EXCLUIR', motivo=d[1], frente='', verso='', original_frente=f0, original_verso=v0)); continue
-        _, f, v, mot = d
-        n = col.new_note(nt); n['Frente'] = to_html(f); n['Verso'] = to_html(v)
-        n['Comentário'] = '<b>Original Medway</b><br>' + r[0] + '<hr>' + (r[1] if len(r) > 1 else '')
-        for t in M.TAGS + ['fonte::medway', 'limpa::editado'] + (['limpa::corrigido'] if 'corrigido' in mot else []): n.add_tag(t)
-        col.add_note(n, did)
-        rows.append(dict(n=i, acao='EDITAR', motivo=mot, frente=f, verso=v, original_frente=f0, original_verso=v0))
+        # uma lista de E(...) divide o card original em vários cards curtos (todos guardam o original no Comentário)
+        for k, (_, f, v, mot) in enumerate(d if isinstance(d, list) else [d]):
+            n = col.new_note(nt); n['Frente'] = to_html(f); n['Verso'] = to_html(v)
+            n['Comentário'] = '<b>Original Medway</b><br>' + r[0] + '<hr>' + (r[1] if len(r) > 1 else '')
+            for t in M.TAGS + ['fonte::medway', 'limpa::editado'] + (['limpa::corrigido'] if 'corrigido' in mot else []): n.add_tag(t)
+            col.add_note(n, did)
+            rows.append(dict(n=i if k == 0 else f'{i}.{k + 1}', acao='EDITAR', motivo=mot, frente=f, verso=v,
+                             original_frente=f0 if k == 0 else '(dividido)', original_verso=v0 if k == 0 else ''))
     for f, v, tags in M.NOVOS:
         n = col.new_note(nt); n['Frente'] = to_html(f); n['Verso'] = to_html(v)
         for t in M.TAGS + ['fonte::claude', 'lacuna'] + tags: n.add_tag(t)

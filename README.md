@@ -82,7 +82,9 @@ No arquivo de decisões, frente e verso são texto simples com estas marcações
 | `**texto**` | negrito |
 | `^^texto^^` | complemento em fonte menor (80%) |
 | `[IMG:url]` | imagem centralizada |
-| `HTML:` no início | HTML cru, sem escape (tabela, fluxograma). Veja os helpers `TAB()` e `FLUXO()` em `exemplos/decisoes_exemplo.py` |
+| `HTML:` no início | HTML cru, sem escape (tabela, fluxograma pequenos). Veja os helpers `TAB()` e `FLUXO()` em `exemplos/decisoes_exemplo.py` |
+
+Para dividir um card longo em vários cards curtos, a decisão vira uma lista: `12: [E(...), E(...)]`. Todos guardam o original da Medway no Comentário.
 
 `col.db` é a coleção do usuário, extraída de um `.apkg`/`.colpkg` exportado do Anki. Ela é usada para o deck novo herdar o tipo de nota "Básico" (Frente / Verso / Comentário).
 

@@ -34,6 +34,7 @@ D = {
     1: K('Pergunta direta?', 'Resposta curta'),
     2: E('Quais os itens? (3)', '-Item A\n-Item B\n-Item C', 'encurtado + complemento'),
     3: E('Pergunta com erro no original?', 'Resposta certa', 'corrigido (o que estava errado)'),
+    5: [E('Card longo dividido: parte 1?', 'Resposta 1', 'dividido em cards curtos'), E('Parte 2?', 'Resposta 2', 'dividido em cards curtos')],
     4: ('X', 'duplicado'),        # motivos: duplicado, fundido, facil-demais, fisiologia-basica, baixo-rendimento
 }
 
