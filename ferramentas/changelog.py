@@ -1,9 +1,15 @@
 """Gera a planilha de revisão (.csv) e o changelog (.md) de um deck a partir de pilot_rows.json.
 Uso: python changelog.py <pilot_rows.json> <saida.csv> <saida.md> <nome do deck>"""
-import json, re, csv, sys, collections
+import json, re, csv, sys, collections, html
 
 def c(t, n=None):
-    t = re.sub(r'\[IMG:[^\]]*\]', '🖼', t or ''); t = re.sub(r'^\w+\.\s*(?=[A-ZÀ-Ú_])', '', t.strip(), count=1) if t.startswith(('Diabetes.', 'Tireoide.')) else t.strip()
+    t = t or ''
+    if t.startswith('HTML:'):   # tabela/fluxograma: mostra só o texto das células/caixas
+        tipo = '[tabela] ' if '<table' in t else '[fluxograma] '
+        t = tipo + re.sub(r'\s*(·\s*)+', ' · ', re.sub(r'<br\s*/?>|</t[dh]>|</div>', ' · ', t[5:])).replace('↓', '→')
+        t = html.unescape(re.sub(r'<[^>]+>', '', t)).strip(' ·')
+    t = t.replace('^^', '')
+    t = re.sub(r'\[IMG:[^\]]*\]', '🖼', t); t = re.sub(r'^\w+\.\s*(?=[A-ZÀ-Ú_])', '', t.strip(), count=1) if t.startswith(('Diabetes.', 'Tireoide.')) else t.strip()
     t = t.replace('|', '/').replace('\n', ' · ')
     return t if not n or len(t) <= n else t[:n] + '…'
 

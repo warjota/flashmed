@@ -11,8 +11,15 @@ def clean(s):
     return re.sub(r'\n\s*\n+', '\n', re.sub(r'[ \t]+', ' ', s)).strip()
 
 def to_html(t):
+    """Texto simples → HTML do Anki.
+    'HTML:' no início = HTML cru (tabela, fluxograma), sem escape.
+    **x** = negrito; ^^x^^ = complemento em fonte menor; [IMG:url] = imagem centralizada."""
+    if t.startswith('HTML:'):
+        return t[5:].strip()
     t = html.escape(t, quote=False)
-    t = re.sub(r'\[IMG:([^\]]+)\]', lambda m: f'<img src="{html.unescape(m.group(1))}">', t)
+    t = re.sub(r'\[IMG:([^\]]+)\]', lambda m: f'<div style="text-align: center;"><img src="{html.unescape(m.group(1))}"></div>', t)
+    t = re.sub(r'\*\*(.+?)\*\*', r'<b>\1</b>', t)
+    t = re.sub(r'\^\^(.+?)\^\^', r'<span style="font-size: 80%">\1</span>', t, flags=re.S)
     return t.replace('\n', '<br>')
 
 def main(dec_path, csv_path, coldb, out, rows_out):

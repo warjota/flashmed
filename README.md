@@ -75,6 +75,15 @@ python ferramentas/changelog.py rows.json novos/Meu_Tema_revisao.csv novos/ALTER
 python ferramentas/testar_importacao.py col.db novos/Meu_Tema.apkg "Baralho::Tema"
 ```
 
+No arquivo de decisões, frente e verso são texto simples com estas marcações:
+
+| Marcação | Vira no Anki |
+|---|---|
+| `**texto**` | negrito |
+| `^^texto^^` | complemento em fonte menor (80%) |
+| `[IMG:url]` | imagem centralizada |
+| `HTML:` no início | HTML cru, sem escape (tabela, fluxograma). Veja os helpers `TAB()` e `FLUXO()` em `exemplos/decisoes_exemplo.py` |
+
 `col.db` é a coleção do usuário, extraída de um `.apkg`/`.colpkg` exportado do Anki. Ela é usada para o deck novo herdar o tipo de nota "Básico" (Frente / Verso / Comentário).
 
 ## Templates
